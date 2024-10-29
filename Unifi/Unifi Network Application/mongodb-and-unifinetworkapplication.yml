@@ -1,0 +1,123 @@
+# mongodb-and-unifinetworkapplication.yml by Michele Blum
+#
+# UniFi Network Application with MongoDB
+#
+# This Docker Compose configuration file defines two services:
+# 1. unifi-db: A MongoDB container utilized by the UniFi Network Application.
+# 2. unifi-network-application: The UniFi Network Application that relies 
+#    on the MongoDB service.
+#
+# MongoDB Initialization Script:
+# - Creates necessary databases and users for the UniFi Network Application.
+#
+# Source: https://github.com/linuxserver/docker-unifi-network-application
+#
+# NOTE: Change placeholder (PATH) to the actual path on your system before running.         
+#
+
+version: "3.8"
+
+services:
+  unifi-db:
+    container_name: unifi-db
+    # Mongo Version has to be fixed, auto update will not work
+    image: docker.io/mongo:7.0.14
+    hostname: unifi-db
+    
+    # The initialization script to create necessary users and databases
+    configs:
+      - source: init-mongo.js
+        target: /docker-entrypoint-initdb.d/init-mongo.js
+
+    # Environment variables for the MongoDB container
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Etc/UTC
+
+    # Mapping MongoDB port to host for external access if needed
+    ports:
+      - target: 27017
+        published: "27017"
+        protocol: tcp
+
+    # Ensures the container restarts automatically unless stopped manually
+    restart: unless-stopped
+
+    # Mounting a directory from the host to the container for persistent data storage
+    volumes:
+      - type: bind
+        source: /PATH/unifi-db
+        target: /data/db
+
+    # Assigning the container to a Docker network (unifi-bridge)
+    networks:
+     - unifi-bridge
+
+    privileged: false  # Ensuring the container does not run with privileged access
+
+  unifi-network-application:
+    container_name: unifi-network-application
+    hostname: unifi-network-application
+
+    # Service depends on the MongoDB container, will start after MongoDB is ready
+    depends_on:
+      unifi-db:
+        condition: service_started
+
+    # Environment variables for the Unifi Network Application container
+    environment:
+      - MONGO_DBNAME=unifi-db
+      - MONGO_HOST=unifi-db
+      - MONGO_PASS=unifi
+      - MONGO_PORT=27017
+      - MONGO_USER=unifi
+      - PGID=1000
+      - PUID=1000
+      - TZ=Etc/UTC
+
+    # Using the specific image for the UniFi Network Application
+    image: lscr.io/linuxserver/unifi-network-application:latest
+
+    # Mapping ports for external access to the UniFi Network Application
+    ports:
+      - target: 8443
+        published: "8443"
+        protocol: tcp
+      - target: 3478
+        published: "3478"
+        protocol: udp
+      - target: 10001
+        published: "10001"
+        protocol: udp
+      - target: 8080
+        published: "8080"
+        protocol: tcp
+
+    # Ensuring the container restarts automatically unless stopped manually
+    restart: unless-stopped
+
+    # Mounting a directory from the host to the container for configuration and data storage
+    volumes:
+      - type: bind
+        source: /PATH/unifi-network-application
+        target: /config
+
+    # Assigning the container to a Docker network (unifi-bridge)
+    networks:
+     - unifi-bridge
+
+# Providing the content of the MongoDB initialization script
+configs:
+  init-mongo.js:
+    content: |
+      db.getSiblingDB("unifi-db").createUser({
+        user: "unifi", 
+        pwd: "unifi", 
+        roles: [{role: "dbOwner", db: "unifi-db"}]
+      });
+      db.getSiblingDB("unifi-db_stat").createUser({
+        user: "unifi", 
+        pwd: "unifi", 
+        roles: [{role: "dbOwner", db: "unifi-db_stat"}]
+      });
