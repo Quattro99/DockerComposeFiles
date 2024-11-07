@@ -32,21 +32,18 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 
 1\. **Clone the Repository**:
 
-   ```bash
-
+   ```
    git clone https://github.com/Quattro99/DockerComposeFiles.git
-
    cd DockerComposeFiles
+   ```
 
 
 2\. **Navigate to the Desired Service**:
 
    Change into the directory of the service you are interested in. For example:
 
-   ```bash
-
+   ```
    cd example-service
-
    ```
 
 3\. **Start the Docker Containers**:
