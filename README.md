@@ -33,8 +33,11 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 1\. **Clone the Repository**:
 
    ```
+
    git clone https://github.com/Quattro99/DockerComposeFiles.git
+
    cd DockerComposeFiles
+
    ```
 
 
