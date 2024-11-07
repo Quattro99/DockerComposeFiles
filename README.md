@@ -31,11 +31,10 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 ## Getting Started
 
 1\. **Clone the Repository**:
-
-   ```
-   git clone https://github.com/Quattro99/DockerComposeFiles.git
-
-   cd DockerComposeFiles
+  
+   ```bash
+      git clone https://github.com/Quattro99/DockerComposeFiles.git
+      cd DockerComposeFiles
    ```
 
 
@@ -43,36 +42,31 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 
    Change into the directory of the service you are interested in. For example:
 
-   ```
-   cd example-service
-   ```
+   ```bash
+      cd example-service   
+   ```
 
 3\. **Start the Docker Containers**:
 
    Use Docker Compose to start the service:
 
-   ```
-   docker-compose up
-
+   ```bash
+      docker-compose up
    ```
 
    To run it in detached mode (in the background), append the `-d` flag:
 
-   ```bash
-
-   docker-compose up -d
-
-   ```
+   ```bash
+      docker-compose up -d
+   ```
 
 4\. **Stop the Docker Containers**:
 
    To stop the running containers, use:
 
-   ```
-
-   docker-compose down
-
-   ```
+   ```bash
+      docker-compose down
+   ```
 
 ## Usage
 
@@ -84,19 +78,15 @@ Here's an example of how to set up a web application using the provided Docker C
 
 1\. Navigate to the web application directory:
 
-   ```
-
-   cd web-app
-
-   ```
+   ```bash
+      cd web-app
+   ```
 
 2\. Start the application:
 
-   ```
-
-   docker-compose up -d
-
-   ```
+   ```bash
+      docker-compose up -d
+   ```
 
 3\. Access the application at `http://localhost:PORT` (replace `PORT` with the configured port in the `docker-compose.yml`).
 
@@ -116,27 +106,21 @@ Contributions are welcome! If you have suggestions for improvements or additiona
 
 2\. Create a new branch for your feature:
 
-   ```bash
-
-   git checkout -b feature/YourFeature
-
-   ```
+   ```bash
+      git checkout -b feature/YourFeature
+   ```
 
 3\. Commit your changes:
 
-   ```bash
-
-   git commit -m "Add some feature"
-
-   ```
+   ```bash
+      git commit -m "Add some feature"
+   ```
 
 4\. Push to the branch:
 
-   ```bash
-
-   git push origin feature/YourFeature
-
-   ```
+   ```bash
+      git push origin feature/YourFeature
+   ```
 
 5\. Open a Pull Request.
 
