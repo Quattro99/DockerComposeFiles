@@ -38,7 +38,6 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 
    cd DockerComposeFiles
 
-   ```
 
 2\. **Navigate to the Desired Service**:
 
