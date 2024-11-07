@@ -33,11 +33,9 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 1\. **Clone the Repository**:
 
    ```
-
    git clone https://github.com/Quattro99/DockerComposeFiles.git
 
    cd DockerComposeFiles
-
    ```
 
 
@@ -53,11 +51,10 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 
    Use Docker Compose to start the service:
 
-   ```bash
-
+   ```
    docker-compose up
 
-   ```
+   ```
 
    To run it in detached mode (in the background), append the `-d` flag:
 
@@ -71,7 +68,7 @@ Make sure both Docker and Docker Compose are running correctly on your machine.
 
    To stop the running containers, use:
 
-   ```bash
+   ```
 
    docker-compose down
 
@@ -87,7 +84,7 @@ Here's an example of how to set up a web application using the provided Docker C
 
 1\. Navigate to the web application directory:
 
-   ```bash
+   ```
 
    cd web-app
 
@@ -95,7 +92,7 @@ Here's an example of how to set up a web application using the provided Docker C
 
 2\. Start the application:
 
-   ```bash
+   ```
 
    docker-compose up -d
 
